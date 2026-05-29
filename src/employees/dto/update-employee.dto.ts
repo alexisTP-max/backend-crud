@@ -1,4 +1,13 @@
-import { IsEmail, IsInt, IsOptional, IsString, MaxLength, Min } from 'class-validator';
+import { Type } from 'class-transformer';
+import {
+  IsDate,
+  IsEmail,
+  IsInt,
+  IsOptional,
+  IsString,
+  MaxLength,
+  Min,
+} from 'class-validator';
 
 export class UpdateEmployeeDto {
   @IsString()
@@ -16,13 +25,18 @@ export class UpdateEmployeeDto {
   @MaxLength(120)
   email?: string;
 
-  @IsString()
+  @Type(() => Date)
+  @IsDate()
   @IsOptional()
-  @MaxLength(100)
-  position?: string;
+  hireDate?: Date;
 
   @IsInt()
   @IsOptional()
   @Min(1)
   departmentId?: number;
+
+  @IsInt()
+  @IsOptional()
+  @Min(1)
+  areaId?: number;
 }
